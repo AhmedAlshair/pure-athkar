@@ -1,0 +1,23 @@
+---
+import { athkarCategories } from '@/data/athkar';
+import CollectionLayout from '@/layouts/CollectionLayout.astro';
+
+export function getStaticPaths() {
+  return athkarCategories.map((cat) => ({
+    params: { category: cat.id },
+    props: { currentCategory: cat },
+  }));
+}
+
+// const { category } = Astro.params;
+const { currentCategory } = Astro.props;
+
+const toggleOptions = athkarCategories
+  .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  .map(({ id, label, icon }) => ({ value: id, label, icon }));
+---
+
+<CollectionLayout
+  currentCategory={currentCategory}
+  toggleOptions={toggleOptions}
+/>

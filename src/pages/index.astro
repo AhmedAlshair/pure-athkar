@@ -1,0 +1,27 @@
+---
+import { athkarCategories } from '@/data/athkar';
+import CollectionLayout from '@/layouts/CollectionLayout.astro';
+import type { ToggleOption } from '@components/buttons/ToggleGroup.svelte';
+
+const toggleOptions: ToggleOption[] = athkarCategories
+  .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  .map(({ id, label, icon, items }) => ({ value: id, label, icon, items }));
+
+// Default to Morning
+const currentCategory = athkarCategories[0];
+---
+
+<!-- Silent URL update to /pure-athkar/morning -->
+<script is:inline>
+  if (
+    window.location.pathname.endsWith('/pure-athkar') ||
+    window.location.pathname.endsWith('/pure-athkar/')
+  ) {
+    history.replaceState(null, '', '/pure-athkar/morning');
+  }
+</script>
+
+<CollectionLayout
+  currentCategory={currentCategory}
+  toggleOptions={toggleOptions}
+/>

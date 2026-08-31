@@ -1,0 +1,105 @@
+---
+import ToggleGroup, {
+  type ToggleOption,
+} from '@components/buttons/ToggleGroup.svelte';
+import type { AthkarCategory } from '@/data/athkar/types';
+import ThikrLayout from '@layouts/ThikrLayout.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { undefined } from 'astro:schema';
+import { MetaDescriptionAr } from '@/utils/Constants.astro';
+import SettingsDropdown from '@components/SettingsDropdown.svelte';
+
+interface Props {
+  currentCategory: AthkarCategory;
+  toggleOptions: ToggleOption[];
+}
+
+const { currentCategory, toggleOptions } = Astro.props;
+---
+
+<BaseLayout
+  title={'أذكار'}
+  description={MetaDescriptionAr}
+  currentPage={currentCategory.label ?? undefined}
+  lang='ar'
+  dir='rtl'
+>
+  <header class='page-header text-center stack-xs'>
+    <h1 dir='rtl' class='athkar-heading'>أذكار</h1>
+    <p class='subtitle' dir='rtl'>ألا بذكر الله تطمئن القلوب</p>
+  </header>
+
+  <div class='toggles-wrapper flex justify-center items-center gap-sm'>
+    <ToggleGroup
+      client:load
+      options={toggleOptions}
+      value={currentCategory.id}
+      dir='rtl'
+    />
+
+    <SettingsDropdown client:load />
+  </div>
+
+  <main class='container-reading stack-lg'>
+    <div class='athkar-container'>
+      <section
+        id={`panel-${currentCategory.id}`}
+        class='athkar-panel active'
+        role='tabpanel'
+        aria-labelledby={`tab-${currentCategory.id}`}
+      >
+        {
+          currentCategory.items.map((thikr) => (
+            <ThikrLayout
+              id={thikr.id}
+              arabic={thikr.arabic}
+              translation={thikr.translation}
+              reference={thikr.reference}
+              count={thikr.count}
+              isQuranic={thikr.isQuranic}
+              prefix={thikr.prefix}
+              suffix={thikr.suffix}
+            />
+          ))
+        }
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-block: var(--space-2xl) var(--space-md);
+  }
+
+  .athkar-heading {
+    font-family: var(--font-arabic-thikr);
+    font-size: var(--font-size-h1);
+    color: var(--accent-text);
+  }
+
+  .toggles-wrapper {
+    position: sticky;
+    top: var(--space-sm);
+    left: auto;
+    right: auto;
+    width: fit-content;
+    max-width: calc(100% - 2 * var(--container-padding));
+    padding: var(--space-xsm);
+    margin-block-start: var(--space-xl);
+    margin-inline: auto;
+    justify-self: center;
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+
+    @media screen and (max-width: 640px) {
+      padding: var(--space-xs);
+      max-width: calc(100% - var(--container-padding));
+    }
+  }
+
+  .athkar-container {
+    padding-block-end: var(--space-3xl);
+  }
+</style>

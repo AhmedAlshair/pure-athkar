@@ -1,0 +1,198 @@
+---
+import {
+  defaultThemeColor,
+  ICONS,
+  MetaDescription,
+  SiteNameAr,
+  SiteNameEn,
+  SitePublicUrl,
+} from '@/utils/Constants.astro';
+import '@styles/base.css';
+import Logo from '@assets/logo.svg';
+
+interface Props {
+  title?: string;
+  description?: string;
+  currentPage?: string;
+  lang?: 'en' | 'ar';
+  dir?: 'ltr' | 'rtl' | 'auto';
+  className?: string;
+}
+
+const {
+  title,
+  description,
+  currentPage,
+  lang = 'ar',
+  dir = 'auto',
+  className,
+} = Astro.props;
+
+const canonicalURL = Astro.url;
+const siteVersion = import.meta.env.PUBLIC_SITE_VERSION;
+const ogImageURL = new URL('/pure-athkar/assets/og-image.png', Astro.site);
+
+let sortedIcons = ICONS.sort().join(',');
+---
+
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta name='generator' content={Astro.generator} />
+
+    <link rel='canonical' href={canonicalURL} />
+    <link rel='sitemap' href='pure-athkar/sitemap-index.xml' />
+
+    <title>{title} {currentPage ? ` | ${currentPage}` : ''}</title>
+    <meta name='description' content={description || MetaDescription} />
+
+    <meta property='og:type' content='website' />
+    <meta property='og:url' content={Astro.url || SitePublicUrl} />
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
+    <meta property='og:image' content={ogImageURL} />
+    <meta property='og:image:alt' content=`${SiteNameAr}` />
+
+    <meta property='twitter:card' content='summary_large_image' />
+    <meta property='twitter:url' content={Astro.url} />
+    <meta property='twitter:title' content={title} />
+    <meta property='twitter:description' content={description} />
+    <meta property='twitter:image' content={ogImageURL} />
+    <meta property='twitter:image:alt' content=`${SiteNameAr}` />
+
+    <link
+      rel='icon'
+      type='image/svg+xml'
+      href='/pure-athkar/assets/favicon.svg'
+    />
+
+    <link rel='manifest' href='/pure-athkar/manifest.webmanifest' />
+
+    <meta name='theme-color' content={defaultThemeColor} />
+    <meta name='version' content={siteVersion} />
+
+    <!-- iPhone and iPad standalone/PWA support -->
+    <meta name='mobile-web-app-capable' content='yes' />
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='apple-mobile-web-app-status-bar-style' content='default' />
+    <link rel='apple-touch-icon' href='/pure-athkar/assets/pwa-192x192.png' />
+    <meta
+      name='apple-mobile-web-app-title'
+      content={lang === 'ar' ? SiteNameAr : SiteNameEn}
+    />
+
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&family=Scheherazade+New:wght@400;500;600&display=swap'
+      rel='stylesheet'
+    />
+    <link
+      rel='stylesheet'
+      href=`https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=${sortedIcons}&display=block`
+    />
+
+    <!-- Service Worker Registration -->
+    <script>
+      import { registerSW } from 'virtual:pwa-register';
+
+      registerSW({
+        immediate: true,
+        onRegisteredSW(swScriptUrl) {
+          console.info('[PWA] Service worker registered:', swScriptUrl);
+        },
+        onRegisterError(error) {
+          console.error('[PWA] Service worker registration failed:', error);
+        },
+        onOfflineReady() {
+          console.info('[PWA] Ready for offline use.');
+        },
+      });
+    </script>
+
+    <script is:inline>
+      try {
+        let theme, fontSize;
+        const raw = localStorage.getItem('pure-athkar');
+        if (raw) {
+          const data = JSON.parse(raw);
+          theme = data.theme;
+          fontSize = String(data.fontSize ?? 0);
+        }
+
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-font-size', fontSize);
+      } catch (e) {
+        console.error('Error applying theme/font-size:', e);
+      }
+    </script>
+  </head>
+
+  <body id='root' class={className}>
+    <slot />
+
+    <footer class='footer-main'>
+      <img src={Logo.src} alt='Logo' class='pure-athkar-logo' />
+      <p class='footer-info'>
+        <span>{SiteNameEn}</span>
+        <span dir='rtl'>
+          آخر تحديث:
+          {' '}
+          {
+            new Date().toLocaleDateString('ar-EG', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })
+          }
+        </span>
+      </p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    margin-top: auto;
+    gap: var(--space-xs);
+
+    .footer-info {
+      padding-block-end: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      span:first-child {
+        font-weight: var(--font-weight-semibold);
+        color: var(--text-secondary);
+      }
+
+      span:last-child {
+        font-size: var(--font-size-sm);
+        color: var(--text-muted);
+      }
+    }
+  }
+
+  .pure-athkar-logo {
+    position: relative;
+    margin: 0 auto;
+    width: 4rem;
+    height: 4rem;
+  }
+</style>

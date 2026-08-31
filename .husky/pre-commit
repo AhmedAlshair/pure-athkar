@@ -1,0 +1,4 @@
+npx npm run lint
+
+# Enable for testing without committing
+# exit 1

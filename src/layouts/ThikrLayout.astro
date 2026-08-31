@@ -1,0 +1,111 @@
+---
+import AthkarCounter from '@components/AthkarCounter.svelte';
+import type { ThikrItem } from '@/data/athkar/types';
+
+interface Props extends ThikrItem {}
+
+let {
+  id,
+  arabic,
+  translation,
+  reference,
+  isQuranic = false,
+  count,
+  prefix,
+  suffix,
+}: Props = Astro.props;
+---
+
+<article class='athkar-card' id={id}>
+  <p class='text-arabic athkar-text' lang='ar' dir='auto'>
+    {prefix && <span class='athkar-prefix'>{prefix}</span>}
+    <span class='athkar-main-text'>{isQuranic ? `﴿ ${arabic} ﴾` : arabic}</span>
+    {suffix && <span class='athkar-suffix'>{suffix}</span>}
+  </p>
+
+  {translation && <p class='athkar-translation'>{translation}</p>}
+
+  {reference && <span class='athkar-reference'>{reference}</span>}
+
+  <AthkarCounter client:load count={count} counterId={id || 'thikr-1'} />
+</article>
+
+<style>
+  /* Athkar Cards & Surfaces */
+  .athkar-card {
+    position: relative;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    background-color: var(--bg-surface);
+    border: var(--stroke-thin) solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-card);
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      transform var(--transition-fast);
+
+    &:hover {
+      border-color: var(--border-strong);
+    }
+
+    &:has(.completed) {
+      border-color: var(--border-success);
+    }
+  }
+
+  /* Athkar Arabic Recitation Text */
+  .athkar-text {
+    font-size: var(--font-size-arabic-base);
+    line-height: var(--lh-arabic);
+    user-select: text;
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+
+    > span {
+      font-family: inherit;
+
+      &.athkar-prefix,
+      &.athkar-suffix {
+        font-size: var(--font-size-arabic-sm);
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  /* Athkar Translation & Transliteration */
+  .athkar-translation {
+    font-size: var(--font-size-base);
+    line-height: var(--lh-body);
+    color: var(--text-secondary);
+  }
+
+  .athkar-transliteration {
+    font-size: var(--font-size-sm);
+    line-height: var(--lh-body);
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Athkar Reference / Benefit */
+  .athkar-reference {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+  }
+
+  .athkar-benefit {
+    padding: var(--space-sm);
+    background-color: var(--bg-subtle);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    border-inline-start: var(--stroke-thick) solid var(--accent);
+  }
+</style>
