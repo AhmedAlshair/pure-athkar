@@ -21,7 +21,6 @@ export function pwaIntegration() {
     name: 'custom-pwa',
     hooks: {
       'astro:build:done': async ({ dir, logger }) => {
-        // Correctly handle file:// URL across all OS environments
         const distDir = fileURLToPath(dir);
 
         logger.info('Generating service worker with Workbox...');
@@ -33,8 +32,10 @@ export function pwaIntegration() {
             globPatterns: ['**/*.{js,css,html,webmanifest,png,svg,ico,woff2}'],
             globIgnores: ['sw.js', 'workbox-*.js'],
 
-            navigateFallback: '/pure-athkar/',
-            navigateFallbackDenylist: [/sitemap/, /robots\.txt/],
+            // Prefix precached URLs with the base path
+            modifyURLPrefix: {
+              '': '/pure-athkar/',
+            },
 
             cleanupOutdatedCaches: true,
             skipWaiting: true,
