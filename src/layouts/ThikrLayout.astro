@@ -41,7 +41,6 @@ let {
     background-color: var(--bg-surface);
     border: var(--stroke-thin) solid var(--border-color);
     border-radius: var(--radius-lg);
-
     box-shadow: var(--shadow-card);
     transition:
       border-color var(--transition-fast),
@@ -54,6 +53,10 @@ let {
 
     &:has(.completed) {
       border-color: var(--border-success);
+    }
+
+    @media screen and (max-width: 600px) {
+      padding: var(--space-md);
     }
   }
 

@@ -74,7 +74,7 @@
 </script>
 
 <div
-  class={['athkar-counter flex justify-start items-center gap-md', className]}
+  class={['athkar-counter flex justify-start items-center gap-sm', className]}
   dir="rtl"
 >
   <Button

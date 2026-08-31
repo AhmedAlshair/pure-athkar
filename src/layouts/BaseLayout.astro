@@ -67,7 +67,11 @@ let sortedIcons = ICONS.sort().join(',');
       href='/pure-athkar/assets/favicon.svg'
     />
 
-    <link rel='manifest' href='/pure-athkar/manifest.webmanifest' />
+    {
+      import.meta.env.PROD && (
+        <link rel='manifest' href='/pure-athkar/manifest.webmanifest' />
+      )
+    }
 
     <meta name='theme-color' content={defaultThemeColor} />
     <meta name='version' content={siteVersion} />
@@ -99,18 +103,20 @@ let sortedIcons = ICONS.sort().join(',');
     <script>
       import { registerSW } from 'virtual:pwa-register';
 
-      registerSW({
-        immediate: true,
-        onRegisteredSW(swScriptUrl) {
-          console.info('[PWA] Service worker registered:', swScriptUrl);
-        },
-        onRegisterError(error) {
-          console.error('[PWA] Service worker registration failed:', error);
-        },
-        onOfflineReady() {
-          console.info('[PWA] Ready for offline use.');
-        },
-      });
+      if (import.meta.env.PROD) {
+        registerSW({
+          immediate: true,
+          onRegisteredSW(swScriptUrl) {
+            console.info('[PWA] Service worker registered:', swScriptUrl);
+          },
+          onRegisterError(error) {
+            console.error('[PWA] Service worker registration failed:', error);
+          },
+          onOfflineReady() {
+            console.info('[PWA] Ready for offline use.');
+          },
+        });
+      }
     </script>
 
     <script is:inline>
