@@ -148,7 +148,7 @@
 }
 
 /* Automatic Dark Mode Fallback when no theme override is set */
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     --bg-primary: #121316;
     --bg-surface: #1a1c22;
@@ -172,7 +172,7 @@
     --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.4);
     --shadow-floating: 0 12px 32px rgba(0, 0, 0, 0.5);
   }
-} */
+}
 
 /* --- Font Size Adjustments (-2 to +2 scale) --- */
 [data-font-size='-2'] {

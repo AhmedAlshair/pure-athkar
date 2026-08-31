@@ -13,17 +13,10 @@ export default defineConfig({
 
   vite: {
     plugins: [
-      // Keep VitePWA here only for the virtual:pwa-register module used in
-      // BaseLayout.astro. SW generation is handled by pwaIntegration() above.
       VitePWA({
         registerType: 'autoUpdate',
         injectRegister: null,
-        // Disable Workbox-based SW generation here — we do it in astro:build:done
         strategies: 'generateSW',
-        // devOptions: {
-        //   enabled: true,
-        //   type: 'classic',
-        // },
         manifest: {
           id: '/pure-athkar/',
           name: 'Pure Athkar',
