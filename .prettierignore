@@ -3,3 +3,6 @@ dist
 build
 coverage
 .vscode
+
+# Project original assets folder
+sources/

@@ -145,9 +145,14 @@ let sortedIcons = ICONS.sort().join(',');
 
     <footer class='footer-main'>
       <img src={Logo.src} alt='Logo' class='pure-athkar-logo' />
-      <p class='footer-info'>
-        <span>{SiteNameEn}</span>
-        <span dir='rtl'>
+      <div class='footer-info'>
+        <span class='app-name'>{SiteNameEn}</span>
+        <p class='text-arabic dad-note'>
+          <span>صدقة جارية عن والدي العزيز</span>
+          <b class='dad-name'>رضا الشاعر</b>
+          <span class='dua athkar-text'>﵀</span>
+        </p>
+        <span class='version' dir='rtl'>
           آخر تحديث:
           {' '}
           {
@@ -160,7 +165,7 @@ let sortedIcons = ICONS.sort().join(',');
           {' | نسخة '}
           {siteVersion}
         </span>
-      </p>
+      </div>
     </footer>
   </body>
 </html>
@@ -182,18 +187,26 @@ let sortedIcons = ICONS.sort().join(',');
     gap: var(--space-xs);
 
     .footer-info {
-      padding-block-end: var(--space-lg);
+      padding-block-end: var(--space-xl);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
 
-      span:first-child {
+      .app-name {
         font-weight: var(--font-weight-semibold);
         color: var(--text-secondary);
       }
 
-      span:last-child {
+      .dad-note {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6ch;
+        color: var(--text-primary);
+      }
+
+      .version {
         font-size: var(--font-size-sm);
         color: var(--text-muted);
       }
