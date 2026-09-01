@@ -73,7 +73,7 @@
   --font-size-lg: 1.125rem;
   --font-size-xl: 1.25rem;
 
-  --font-size-h1: clamp(1.85rem, 2.2vw + 1.2rem, 2.5rem);
+  --font-size-h1: clamp(1.95rem, 2.2vw + 1.2rem, 2.5rem);
   --font-size-h2: clamp(1.45rem, 1.6vw + 1rem, 1.95rem);
   --font-size-h3: clamp(1.2rem, 1.2vw + 0.85rem, 1.5rem);
   --font-size-h4: 1.15rem;

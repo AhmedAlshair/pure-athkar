@@ -22,17 +22,37 @@ export default defineConfig({
           name: 'أذكار',
           short_name: 'أذكار',
           description: 'أذكار وأدعية المسلم اليومية',
-
           display: 'standalone',
           display_override: ['standalone', 'fullscreen'],
-
           start_url: '/pure-athkar/',
           scope: '/pure-athkar/',
-
           theme_color: '#196850',
           background_color: '#ffffff',
           lang: 'ar',
           dir: 'rtl',
+
+          shortcuts: [
+            {
+              name: 'أذكار الصباح',
+              short_name: 'الصباح',
+              url: '/pure-athkar/morning',
+            },
+            {
+              name: 'أذكار المساء',
+              short_name: 'المساء',
+              url: '/pure-athkar/evening',
+            },
+            {
+              name: 'أذكار بعد الصلاة',
+              short_name: 'بعد الصلاة',
+              url: '/pure-athkar/after-prayer',
+            },
+            {
+              name: 'أذكار النوم',
+              short_name: 'النوم',
+              url: '/pure-athkar/sleep',
+            },
+          ],
 
           icons: [
             {
