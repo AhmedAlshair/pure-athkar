@@ -27,7 +27,8 @@ export const ICONS: string[] = [
 
 export const SitePublicUrl = 'https://ahmedalshair.net/pure-athkar';
 export const SiteNameAr = 'أذكار';
+export const SiteNameArDisplay = 'أذڪَار';
 export const SiteNameEn = 'Pure Athkar';
 export const MetaDescription = 'Daily Muslim Remembrance and Supplications';
-export const MetaDescriptionAr = 'أذكار المسلم اليومية';
+export const MetaDescriptionAr = 'أذكار وأدعية المسلم اليومية';
 export const defaultThemeColor = '#196850';

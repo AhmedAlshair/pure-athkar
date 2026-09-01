@@ -6,7 +6,11 @@ import type { AthkarCategory } from '@/data/athkar/types';
 import ThikrLayout from '@layouts/ThikrLayout.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { undefined } from 'astro:schema';
-import { MetaDescriptionAr } from '@/utils/Constants.astro';
+import {
+  MetaDescriptionAr,
+  SiteNameAr,
+  SiteNameArDisplay,
+} from '@/utils/Constants.astro';
 import SettingsDropdown from '@components/SettingsDropdown.svelte';
 
 interface Props {
@@ -18,14 +22,14 @@ const { currentCategory, toggleOptions } = Astro.props;
 ---
 
 <BaseLayout
-  title={'أذكار'}
+  title={SiteNameAr || 'أذكار'}
   description={MetaDescriptionAr}
   currentPage={currentCategory.label ?? undefined}
   lang='ar'
   dir='rtl'
 >
-  <header class='page-header text-center stack-xs'>
-    <h1 dir='rtl' class='athkar-heading'>أذكار</h1>
+  <header class='page-header flex flex-col gap-xs text-center stack-lg'>
+    <h1 dir='rtl' class='athkar-heading'>{SiteNameArDisplay || 'أذكار'}</h1>
     <p class='subtitle' dir='rtl'>ألا بذكر الله تطمئن القلوب</p>
   </header>
 
@@ -75,6 +79,11 @@ const { currentCategory, toggleOptions } = Astro.props;
   .athkar-heading {
     font-family: var(--font-arabic-thikr);
     font-size: var(--font-size-h1);
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1,
+      'kern' 1,
+      'liga' 1;
     color: var(--accent-text);
   }
 

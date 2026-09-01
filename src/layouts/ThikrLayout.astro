@@ -17,9 +17,11 @@ let {
 ---
 
 <article class='athkar-card' id={id}>
-  <p class='text-arabic athkar-text' lang='ar' dir='auto'>
+  <p class={'text-arabic athkar-text'} lang='ar' dir='auto'>
     {prefix && <span class='athkar-prefix'>{prefix}</span>}
-    <span class='athkar-main-text'>{isQuranic ? `﴿ ${arabic} ﴾` : arabic}</span>
+    <span class={`athkar-main-text ${isQuranic && 'quranic'}`}>
+      {isQuranic ? `﴿ ${arabic} ﴾` : arabic}
+    </span>
     {suffix && <span class='athkar-suffix'>{suffix}</span>}
   </p>
 
@@ -68,6 +70,12 @@ let {
     display: inline-flex;
     flex-direction: column;
     gap: var(--space-xs);
+
+    .athkar-main-text.quranic {
+      font-variation-settings:
+        'CV76' 0,
+        'CV81' 1;
+    }
 
     > span {
       font-family: inherit;

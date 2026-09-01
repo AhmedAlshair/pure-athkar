@@ -1,14 +1,6 @@
 // @ts-check
 /**
  * Custom Astro integration for PWA service worker generation.
- *
- * Rationale: vite-plugin-pwa hooks into Vite's `closeBundle`, but Astro 7
- * runs two separate Vite builds internally (client + server), and the hook
- * fires at the wrong time — meaning Workbox's generateSW never runs.
- * @vite-pwa/astro does not support Astro 7 yet.
- *
- * This integration directly calls workbox-build's generateSW in the
- * `astro:build:done` hook, which runs after all static pages are written.
  */
 
 import { generateSW } from 'workbox-build';
@@ -29,7 +21,9 @@ export function pwaIntegration() {
           const { count, size, warnings } = await generateSW({
             swDest: path.join(distDir, 'sw.js'),
             globDirectory: distDir,
-            globPatterns: ['**/*.{js,css,html,webmanifest,png,svg,ico,woff2}'],
+            globPatterns: [
+              '**/*.{js,css,html,webmanifest,jpg,jpeg,png,svg,ico,woff2}',
+            ],
             globIgnores: ['sw.js', 'workbox-*.js'],
 
             // Prefix precached URLs with the base path

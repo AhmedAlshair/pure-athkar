@@ -24,7 +24,7 @@ const {
   description,
   currentPage,
   lang = 'ar',
-  dir = 'auto',
+  dir = 'rtl',
   className,
 } = Astro.props;
 
@@ -80,7 +80,10 @@ let sortedIcons = ICONS.sort().join(',');
     <meta name='mobile-web-app-capable' content='yes' />
     <meta name='apple-mobile-web-app-capable' content='yes' />
     <meta name='apple-mobile-web-app-status-bar-style' content='default' />
-    <link rel='apple-touch-icon' href='/pure-athkar/assets/pwa-192x192.png' />
+    <link
+      rel='apple-touch-icon'
+      href='/pure-athkar/assets/icons/maskable_icon_x192.png'
+    />
     <meta
       name='apple-mobile-web-app-title'
       content={lang === 'ar' ? SiteNameAr : SiteNameEn}
@@ -154,6 +157,8 @@ let sortedIcons = ICONS.sort().join(',');
               day: 'numeric',
             })
           }
+          {' | نسخة '}
+          {siteVersion}
         </span>
       </p>
     </footer>

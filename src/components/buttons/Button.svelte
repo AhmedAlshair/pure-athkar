@@ -89,6 +89,7 @@
   .btn.small {
     padding: var(--space-2xs) var(--space-xs);
     font-size: var(--font-size-sm);
+    gap: var(--space-2xs);
   }
 
   .btn.medium {
@@ -98,7 +99,7 @@
 
   .btn.large {
     padding: var(--space-sm) var(--space-md);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
   }
 
   .btn.primary {
