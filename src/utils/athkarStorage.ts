@@ -1,5 +1,5 @@
 const STORAGE_KEY = 'pure-athkar';
-export const AUTO_RESET_DURATION_MS = 12 * 60 * 60 * 1000; // 12 hours
+export const AUTO_RESET_DURATION_MS = 8 * 60 * 60 * 1000; // 8 hours
 
 export type ThemeMode = 'light' | 'dark';
 export type FontSizeLevel = -2 | -1 | 0 | 1 | 2;

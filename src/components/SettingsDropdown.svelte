@@ -321,7 +321,7 @@
     position: absolute;
     top: calc(100% + var(--space-xs));
     inset-inline-start: auto;
-    inset-inline-end: 0;
+    inset-inline-end: calc(-1 * var(--space-lg));
     padding: var(--space-md);
     width: clamp(240px, 90vw, 400px);
     display: flex;
@@ -337,6 +337,7 @@
     @media screen and (max-width: 600px) {
       position: absolute;
       top: calc(100% + var(--space-xs));
+      inset-inline-end: calc(-1 * var(--space-md));
       width: min(24rem, calc(100vw - 2 * var(--space-sm)));
       max-height: calc(100dvh - 2 * var(--space-3xl));
       overflow-y: auto;

@@ -81,7 +81,9 @@
       box-shadow var(--transition-fast),
       transform var(--transition-fast);
 
-    &:active {
+    &:active,
+    &:focus-visible {
+      -webkit-tap-highlight-color: transparent;
       transform: scale(0.98);
     }
   }
