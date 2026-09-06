@@ -2,6 +2,7 @@
   "name": "pure-athkar",
   "type": "module",
   "version": "0.0.1",
+  "author": "Ahmed Alshair",
   "engines": {
     "node": ">=22.12.0"
   },
@@ -17,9 +18,9 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/svelte": "^9.0.1",
-    "astro": "^7.2.9",
+    "astro": "^7.3.1",
     "svelte": "^5.57.0",
     "typescript": "^6.0.3"
   },

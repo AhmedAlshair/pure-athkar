@@ -347,7 +347,7 @@
   @keyframes menuSlideDown {
     from {
       opacity: 0;
-      transform: translateY(-8px) scale(0.97);
+      transform: translateY(-8px) scale(0.95);
     }
     to {
       opacity: 1;

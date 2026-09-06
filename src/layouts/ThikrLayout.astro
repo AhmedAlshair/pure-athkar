@@ -19,7 +19,7 @@ let {
 <article class='athkar-card' id={id}>
   <p class={'text-arabic athkar-text'} lang='ar' dir='auto'>
     {prefix && <span class='athkar-prefix'>{prefix}</span>}
-    <span class={`athkar-main-text ${isQuranic && 'quranic'}`}>
+    <span class={`athkar-main-text legible ${isQuranic && 'quranic'}`}>
       {isQuranic ? `﴿ ${arabic} ﴾` : arabic}
     </span>
     {suffix && <span class='athkar-suffix'>{suffix}</span>}

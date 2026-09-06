@@ -83,8 +83,7 @@
 
     &:active,
     &:focus-visible {
-      -webkit-tap-highlight-color: transparent;
-      transform: scale(0.98);
+      transform: scale(0.95);
     }
   }
 

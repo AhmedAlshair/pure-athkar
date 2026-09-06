@@ -13,7 +13,6 @@
     options: ToggleOption[];
     value?: string;
     defaultValue?: string;
-    groupName?: string;
     dir?: 'ltr' | 'rtl' | 'auto';
     className?: string;
     onchange?: (value: string) => void;
@@ -23,7 +22,6 @@
     options = [],
     value,
     defaultValue,
-    groupName = 'athkar-group',
     dir = 'auto',
     className = '',
     onchange,
@@ -98,23 +96,6 @@
       {/if}
       <span class="toggle-label">{option.label}</span>
     </a>
-    <!-- <button
-      type="button"
-      role="tab"
-      id={`tab-${option.value}`}
-      aria-selected={isSelected}
-      aria-controls={`panel-${option.value}`}
-      tabindex={isSelected ? 0 : -1}
-      class={['toggle-button', isSelected && 'active']}
-      bind:this={tabButtons[i]}
-      onclick={() => selectOption(option.value)}
-      onkeydown={(e) => handleKeyDown(e, i)}
-    >
-      {#if option.icon}
-        <Icon name={option.icon} className="toggle-icon" />
-      {/if}
-      <span class="toggle-label">{option.label}</span>
-    </button> -->
   {/each}
 </div>
 
@@ -130,7 +111,7 @@
     border: var(--stroke-thin) solid var(--border-color);
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-subtle);
-    max-width: 100%;
+    max-width: min(100%, var(--max-width-reading));
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none;
@@ -180,12 +161,12 @@
     }
 
     &:active {
-      transform: scale(0.97);
+      transform: scale(0.95);
     }
 
     &:focus-visible {
       outline: var(--stroke-thick) solid var(--accent);
-      outline-offset: 2px;
+      outline-offset: var(--stroke-thick);
     }
 
     &.active {

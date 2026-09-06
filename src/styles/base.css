@@ -281,6 +281,7 @@ button {
   background: none;
   border: none;
   cursor: pointer;
+  -webkit-tab-highlight-color: transparent;
 }
 
 ul,
@@ -342,7 +343,7 @@ body {
 
 :focus-visible {
   outline: var(--stroke-thick) solid var(--accent);
-  outline-offset: 3px;
+  outline-offset: var(--stroke-thick);
 }
 
 :focus:not(:focus-visible) {
@@ -366,6 +367,11 @@ body {
 
   &.athkar-text {
     font-family: var(--font-arabic-thikr);
+
+    &.legible,
+    .legible {
+      font-weight: var(--font-weight-medium);
+    }
   }
 
   &.lg {

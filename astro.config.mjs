@@ -35,22 +35,22 @@ export default defineConfig({
             {
               name: 'أذكار الصباح',
               short_name: 'الصباح',
-              url: '/pure-athkar/morning',
+              url: '/pure-athkar/morning/',
             },
             {
               name: 'أذكار المساء',
               short_name: 'المساء',
-              url: '/pure-athkar/evening',
+              url: '/pure-athkar/evening/',
             },
             {
               name: 'أذكار بعد الصلاة',
               short_name: 'بعد الصلاة',
-              url: '/pure-athkar/after-prayer',
+              url: '/pure-athkar/after-prayer/',
             },
             {
               name: 'أذكار النوم',
               short_name: 'النوم',
-              url: '/pure-athkar/sleep',
+              url: '/pure-athkar/sleep/',
             },
           ],
 
