@@ -79,12 +79,11 @@
 >
   <Button
     aria-label="Recite"
-    className={[
-      'counter-button aspect-square',
-      currentCount === count ? 'completed' : '',
-    ]}
+    className={['counter-button aspect-square']}
+    variant={currentCount === count ? 'success' : 'primary'}
     size={'large'}
     onclick={increment}
+    disabled={currentCount === count}
   >
     {currentCount}
   </Button>
@@ -127,12 +126,6 @@
   :global(.btn.counter-button) {
     min-width: 6ch;
     aspect-ratio: 1/1;
-
-    &.completed {
-      background-color: var(--status-success) !important;
-      border-color: var(--status-success);
-      color: var(--bg-surface);
-    }
   }
 
   .counter-badge {
@@ -151,7 +144,7 @@
 
     &.completed {
       padding: var(--space-2xs) var(--space-md) var(--space-2xs) var(--space-sm);
-      color: var(--status-success);
+      color: var(--success);
     }
   }
 </style>

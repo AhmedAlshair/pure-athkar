@@ -17,7 +17,7 @@
     transition: all var(--transition-fast);
 
     &.success {
-      color: var(--status-success);
+      color: var(--success);
     }
 
     &.warning {
@@ -25,7 +25,7 @@
     }
 
     &.error {
-      color: var(--status-error);
+      color: var(--error);
     }
   }
 </style>

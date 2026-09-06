@@ -4,7 +4,7 @@
   import type { HTMLButtonAttributes } from 'svelte/elements';
 
   interface Props {
-    variant?: 'primary' | 'secondary' | 'ghost';
+    variant?: 'primary' | 'secondary' | 'ghost' | 'success' | 'danger';
     size?: 'small' | 'medium' | 'large';
     onclick?: () => void;
     icon?: string;
@@ -108,7 +108,7 @@
     background-color: var(--accent);
     color: var(--bg-surface);
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: var(--accent-hover);
       color: var(--bg-surface);
     }
@@ -119,7 +119,7 @@
     color: var(--text-primary);
     border: var(--stroke-thin) solid var(--border-color);
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: var(--bg-hover);
     }
   }
@@ -128,9 +128,29 @@
     background-color: transparent;
     color: var(--text-secondary);
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: var(--bg-subtle);
       color: var(--text-primary);
+    }
+  }
+
+  .btn.success {
+    background-color: var(--success);
+    color: var(--bg-surface);
+
+    &:hover:not(:disabled) {
+      background-color: var(--success-hover);
+      color: var(--bg-surface);
+    }
+  }
+
+  .btn.danger {
+    background-color: var(--danger);
+    color: var(--bg-surface);
+
+    &:hover:not(:disabled) {
+      background-color: var(--danger-hover);
+      color: var(--bg-surface);
     }
   }
 
