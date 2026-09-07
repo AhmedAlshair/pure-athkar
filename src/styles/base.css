@@ -281,7 +281,7 @@ button {
   background: none;
   border: none;
   cursor: pointer;
-  -webkit-tab-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
 }
 
 ul,
