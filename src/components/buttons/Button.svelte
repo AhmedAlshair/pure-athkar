@@ -1,11 +1,21 @@
 <script lang="ts">
   import Icon from '@/components/Icon.svelte';
   import type { Snippet } from 'svelte';
-  import type { HTMLButtonAttributes } from 'svelte/elements';
+  import type {
+    HTMLAnchorAttributes,
+    HTMLButtonAttributes,
+  } from 'svelte/elements';
+
+  type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'success' | 'danger';
+  type ButtonSize = 'small' | 'medium' | 'large';
 
   interface Props {
-    variant?: 'primary' | 'secondary' | 'ghost' | 'success' | 'danger';
-    size?: 'small' | 'medium' | 'large';
+    variant?: ButtonVariant;
+    size?: ButtonSize;
+    href?: HTMLAnchorAttributes['href'];
+    target?: HTMLAnchorAttributes['target'];
+    rel?: HTMLAnchorAttributes['rel'];
+    download?: HTMLAnchorAttributes['download'];
     onclick?: () => void;
     icon?: string;
     loading?: boolean;
@@ -20,6 +30,10 @@
   let {
     variant = 'primary',
     size = 'medium',
+    href,
+    target,
+    rel,
+    download,
     onclick,
     icon,
     loading,
@@ -30,36 +44,65 @@
     children,
     ...props
   }: Props = $props();
-</script>
 
-<button
-  {id}
-  class={[
+  let isDisabled = $derived(Boolean(disabled || loading));
+  let classes = $derived([
     'btn',
     variant,
     size,
-    disabled && 'disabled',
-    loading && 'disabled',
+    isDisabled && 'disabled',
     !children && icon && 'icon-only',
     ...(className ?? []),
-  ]}
-  {onclick}
-  {type}
-  {disabled}
-  {...props}
->
-  {#if loading}
-    <!-- <Loader /> -->
-  {/if}
+  ]);
+</script>
 
-  {#if children}
-    <span class="btn-text">{@render children()}</span>
-  {/if}
+{#if href}
+  <a
+    {id}
+    class={classes}
+    href={isDisabled ? undefined : href}
+    {target}
+    {rel}
+    {download}
+    aria-disabled={isDisabled || undefined}
+    tabindex={isDisabled ? -1 : props.tabindex}
+    onclick={isDisabled ? (event) => event.preventDefault() : onclick}
+    {...props}
+  >
+    {#if loading}
+      <!-- <Loader /> -->
+    {/if}
 
-  {#if icon}
-    <Icon name={icon} className="icon btn-icon" />
-  {/if}
-</button>
+    {#if children}
+      <span class="btn-text">{@render children()}</span>
+    {/if}
+
+    {#if icon}
+      <Icon name={icon} className="icon btn-icon" />
+    {/if}
+  </a>
+{:else}
+  <button
+    {id}
+    class={classes}
+    {onclick}
+    type={type ?? 'button'}
+    {disabled}
+    {...props}
+  >
+    {#if loading}
+      <!-- <Loader /> -->
+    {/if}
+
+    {#if children}
+      <span class="btn-text">{@render children()}</span>
+    {/if}
+
+    {#if icon}
+      <Icon name={icon} className="icon btn-icon" />
+    {/if}
+  </button>
+{/if}
 
 <style>
   .btn {
@@ -68,7 +111,6 @@
     align-items: center;
     justify-content: center;
     gap: var(--space-xs);
-    padding: var(--space-xs) var(--space-md);
     border-radius: var(--radius-md);
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-sm);
@@ -94,12 +136,12 @@
   }
 
   .btn.medium {
-    padding: var(--space-xs) var(--space-sm);
+    padding: var(--space-xs) var(--space-md);
     font-size: var(--font-size-md);
   }
 
   .btn.large {
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
     font-size: var(--font-size-xl);
   }
 

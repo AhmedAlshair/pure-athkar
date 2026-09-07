@@ -1,0 +1,71 @@
+---
+import Button from '@/components/buttons/Button.svelte';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+Astro.response.status = 500;
+---
+
+<BaseLayout
+  title='خطأ في الخادم'
+  description='حدث خطأ غير متوقع في الخادم.'
+  currentPage='500'
+  lang='ar'
+  dir='rtl'
+  className='error-page-shell'
+>
+  <main class='error-page'>
+    <div class='error-card'>
+      <p class='error-code'>500</p>
+      <h1>حدث خطأ في الخادم</h1>
+      <p class='error-text'>
+        نحن نعمل على حل هذه المشكلة. حاول تحديث الصفحة أو العودة لاحقاً.
+      </p>
+      <Button href='/pure-athkar/morning/' variant='primary' size='large'>
+        العودة إلى الأذكار
+      </Button>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .error-page-shell {
+    background: var(--background);
+  }
+
+  .error-page {
+    min-height: 70vh;
+    display: grid;
+    place-items: center;
+    padding: var(--space-xl) var(--space-xl);
+  }
+
+  .error-card {
+    max-width: 44rem;
+    width: min(100%, 40rem);
+    padding: var(--space-2xl) var(--space-xl);
+    text-align: center;
+    border-radius: 1.25rem;
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-floating);
+  }
+
+  .error-code {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1;
+    font-weight: var(--font-weight-bold);
+  }
+
+  h1 {
+    margin: var(--space-md) 0 var(--space-sm);
+    color: var(--text-primary);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+  }
+
+  .error-text {
+    margin: 0 0 var(--space-lg);
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+</style>

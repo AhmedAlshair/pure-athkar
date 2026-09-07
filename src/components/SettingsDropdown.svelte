@@ -207,7 +207,7 @@
         <div class="font-size-stepper flex items-center justify-between">
           <Button
             variant={'ghost'}
-            size={'small'}
+            size={'medium'}
             icon="remove"
             onclick={decreaseFontSize}
             aria-label="تصغير الخط"
