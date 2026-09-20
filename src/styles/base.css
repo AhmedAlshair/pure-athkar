@@ -475,7 +475,7 @@ h4:lang(ar) {
     'opsz' 24;
   vertical-align: middle;
   line-height: 1;
-  font-display: block;
+  /* font-display: block; */
 }
 
 /* --- 5. Interactive Elements (Links, Buttons, Form Inputs) --- */
@@ -744,4 +744,40 @@ select {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* Loading Skeletons */
+.skeleton {
+  position: relative;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-subtle);
+  color: transparent;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--bg-hover) 50%,
+      transparent 100%
+    );
+    animation: skeleton-loading 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }

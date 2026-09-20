@@ -43,7 +43,16 @@ const { currentCategory, toggleOptions } = Astro.props;
       dir='rtl'
     />
 
-    <SettingsDropdown client:load />
+    <SettingsDropdown client:only='svelte'>
+      <div
+        slot='fallback'
+        class='skeleton settings-skeleton'
+        aria-hidden='true'
+        aria-busy='true'
+        aria-live='polite'
+      >
+      </div>
+    </SettingsDropdown>
   </div>
 
   <main class='container-reading stack-lg'>
@@ -112,5 +121,11 @@ const { currentCategory, toggleOptions } = Astro.props;
 
   .athkar-container {
     padding-block-end: var(--space-3xl);
+  }
+
+  .settings-skeleton {
+    height: 48px;
+    width: 48px;
+    border-radius: var(--radius-full);
   }
 </style>

@@ -31,8 +31,15 @@ let {
   {reference && <span class='athkar-reference'>{reference}</span>}
 
   <AthkarCounter client:only='svelte' count={count} counterId={id || 'thikr-1'}>
-    <div slot='fallback' class='counter-fallback'>
-      <HorizontalLoader />
+    <div
+      slot='fallback'
+      class='counter-fallback'
+      aria-hidden='true'
+      aria-busy='true'
+      aria-live='polite'
+    >
+      <span class='skeleton button-skeleton'></span>
+      <span class='skeleton chip-skeleton'></span>
     </div>
   </AthkarCounter>
 </article>
@@ -128,7 +135,20 @@ let {
   .counter-fallback {
     display: flex;
     align-items: center;
-    min-height: 2.5em;
+    justify-content: space-between;
+    min-height: min-content;
     width: 100%;
+  }
+
+  .chip-skeleton {
+    width: 6.48em;
+    height: 2.48em;
+    border-radius: var(--radius-full);
+  }
+
+  .button-skeleton {
+    width: 4.4em;
+    height: 4.4em;
+    aspect-ratio: 1;
   }
 </style>
