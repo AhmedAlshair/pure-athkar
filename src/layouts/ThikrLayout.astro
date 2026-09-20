@@ -1,5 +1,6 @@
 ---
 import AthkarCounter from '@components/AthkarCounter.svelte';
+import HorizontalLoader from '@components/HorizontalLoader.astro';
 import type { ThikrItem } from '@/data/athkar/types';
 
 interface Props extends ThikrItem {}
@@ -29,7 +30,11 @@ let {
 
   {reference && <span class='athkar-reference'>{reference}</span>}
 
-  <AthkarCounter client:load count={count} counterId={id || 'thikr-1'} />
+  <AthkarCounter client:only='svelte' count={count} counterId={id || 'thikr-1'}>
+    <div slot='fallback' class='counter-fallback'>
+      <HorizontalLoader />
+    </div>
+  </AthkarCounter>
 </article>
 
 <style>
@@ -118,5 +123,12 @@ let {
     font-size: var(--font-size-sm);
     color: var(--text-secondary);
     border-inline-start: var(--stroke-thick) solid var(--accent);
+  }
+
+  .counter-fallback {
+    display: flex;
+    align-items: center;
+    min-height: 2.5em;
+    width: 100%;
   }
 </style>
