@@ -31,6 +31,8 @@ export function pwaIntegration() {
               '': '/pure-athkar/',
             },
 
+            dontCacheBustURLsMatching: /\.[0-9a-zA-Z_-]{8}\./,
+
             cleanupOutdatedCaches: true,
             skipWaiting: true,
             clientsClaim: true,
